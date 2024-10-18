@@ -5,6 +5,7 @@ url = "https://raw.githubusercontent.com/cran/BTYD/master/data/cdnowElog.csv"
 
 #전체 데이터
 data = read.csv(url, header=T)
+data
 
 head(data)
 
@@ -92,6 +93,7 @@ anim_save("꽃받침크기와 종의 분포도.gif", path="C:/Users/AISW-509-189
 month=c(1, 2, 3, 4, 5, 6)
 sales=c(3, 3, 5, 5, 7, 4)
 df1 = data.frame(부서="영업1팀", 월=month, 매출=sales)
+df1
 
 # 영업 2팀의 6개월간 데이터를 데이터프레임에 저장
 month=c(1, 2, 3, 4, 5, 6)
@@ -100,6 +102,7 @@ df2 = data.frame(부서="영업2팀", 월=month, 매출=sales)
 
 # 행으로 df1, df2를 연결
 df = rbind(df1, df2)
+df
 
 # 선그래프 그리기
 anim = ggplot(data=df, aes(x=월, y=매출, group=부서)) + 
@@ -107,6 +110,7 @@ anim = ggplot(data=df, aes(x=월, y=매출, group=부서)) +
   geom_point(aes(color=부서), size=5, alpha=0.5) +
   labs(title="부서별 월별 매출액", x="월", y="매출액(억원") +
   transition_reveal(월)
+anim
   
 # 선그래프 애니메이션 설정과 실행
 animate(anim, width=500, height=400, duration=10, renderer=gifski_renderer(loop = FALSE))

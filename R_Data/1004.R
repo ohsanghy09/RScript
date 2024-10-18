@@ -140,7 +140,7 @@ while(TRUE){
   
   # x축의 값이 400이 되면 반복문 빠져나간다.
   if(x == 400){
-    arrow = image_rotate(image_background(arrow, "none"), -22)
+    arrow = image_rotate(image_background(arrow, "none"), -11)
     break
   }
   
