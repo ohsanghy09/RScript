@@ -46,4 +46,19 @@ content = content(response, "text")
 
 
 xmlFile = xmlParse(content, asText=TRUE)
+xmlFile
+
+# XML => 데이터프레임으로 변환
+df = xmlToDataFrame(getNodeSet(xmlFile, "//items/item"))
+df
+
+
+library(ggplot2)
+
+# 미세먼지 시간별 농도 그래프
+ggplot(data = df, aes(x=dataTime, y=seoul)) + 
+  geom_bar(stat = "identity", fill = "orange") + 
+  theme(axis.text.x = element_text(angle=90)) + 
+  labs(title = "시간대별 서울지역의 미세먼지 농도 변화", x="측정일시", y = "미세먼지농도(PM10")
+
 
