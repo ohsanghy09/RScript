@@ -61,4 +61,37 @@ ggplot(data = df, aes(x=dataTime, y=seoul)) +
   theme(axis.text.x = element_text(angle=90)) + 
   labs(title = "시간대별 서울지역의 미세먼지 농도 변화", x="측정일시", y = "미세먼지농도(PM10")
 
+# 지역별 미세먼지 농도의 지도 분포
+# 미세먼지 농도에 대한 데이터프레임 확인
+
+df
+
+# df에서 필요한 데이터만 추출
+# 제공되는 미세먼지 데이터 중 마지막 시간의 데이터가 1행이고, 지역이 연속적이지 않기 때문에 아래와 같은 데이터추출이 필요
+pm = df[1, c(1:16, 19)]
+pm
+
+# 지역별 미세먼지 데이터프레임의 행과 열을 바꾸기
+pm.region = t(pm)
+pm.region
+
+# 행렬데이터를 데이터프레임으로 변환
+df.region = as.data.frame(pm.region)
+df.region
+
+# 1로 설정된 컬럼이름을 PM10 컬럼명으로 변경
+colnames(df.region) = "PM10"
+df.region
+
+
+
+
+
+
+
+
+
+
+
+
 
