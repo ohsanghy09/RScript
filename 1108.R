@@ -144,22 +144,28 @@ df.PM10 = merge(x=df.region, y=longlat, by="NAME", all=TRUE)
 df.PM10
 
 
+
+
+## 겁나 이상할 때
+df.PM10 <- st_as_sf(df.PM10, coords = c("long", "lat"), crs = 4326)
+df.PM10 <- st_transform(df.PM10, st_crs(map))
+
 library(ggplot2)
 
 ggplot() + 
-#  geom_sf(data=map,
-#          fill="white",
-#          alpha=0.5,
-#          color="black") + 
-   geom_polygon(data=total_longlat,
-                aes(x=long, y=lat),
-                fill="white",
-                alpha=0.5,
-                color="black") + 
+  geom_sf(data=map,
+          fill="white",
+          alpha=0.5,
+          color="black") + 
+#   geom_polygon(data=total_longlat,
+#                aes(x=long, y=lat),
+#                fill="white",
+#                alpha=0.5,
+#                color="black") + 
    geom_point(data = df.PM10, aes(x=long, y=lat, size=PM10),
              shape=21, color="black", fill="red", alpha=0.3) + 
      theme(legend.position = "none") + 
-     labs(title="PM10 농동 분포", x="경도", y = "위도")
+     labs(title="PM10 농도 분포", x="경도", y = "위도")
 
 
 
